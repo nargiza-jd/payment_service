@@ -1,4 +1,5 @@
 package kg.attractor.payment_service.service.impl;
+
 import kg.attractor.payment_service.dao.UserDao;
 import kg.attractor.payment_service.dto.UserDto;
 import kg.attractor.payment_service.model.User;
@@ -17,7 +18,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(UserDto userDto) {
         if (userDao.existsByPhoneNumber(userDto.getPhoneNumber())) {
-            throw new RuntimeException("Пользователь с таким номером уже существует");
+            throw new IllegalArgumentException("Пользователь с таким номером уже существует");
         }
 
         User user = User.builder()
@@ -28,5 +29,15 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         userDao.save(user);
+    }
+
+    @Override
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return userDao.existsByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public User findByPhoneNumber(String phoneNumber) {
+        return userDao.findByPhoneNumber(phoneNumber);
     }
 }
