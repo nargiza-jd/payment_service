@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Transaction {
     private Long id;
-    private Long fromAccountId;
-    private Long toAccountId;
+    private Long senderAccountId;
+    private Long receiverAccountId;
     private Double amount;
     private String currency;
-    private LocalDateTime timestamp;
     private String status;
+    private LocalDateTime timestamp;
 }

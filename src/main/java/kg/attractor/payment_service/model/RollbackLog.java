@@ -12,6 +12,6 @@ import java.time.LocalDateTime;
 public class RollbackLog {
     private Long id;
     private Long transactionId;
-    private LocalDateTime rollbackTime;
+    private LocalDateTime rollbackDate;
     private String reason;
 }
