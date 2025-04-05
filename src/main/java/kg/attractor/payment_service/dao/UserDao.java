@@ -1,23 +1,18 @@
 package kg.attractor.payment_service.dao;
 
+import kg.attractor.payment_service.dao.mapper.UserMapper;
 import kg.attractor.payment_service.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class UserDao {
     private final JdbcTemplate jdbcTemplate;
-
-    private final RowMapper<User> userRowMapper = (rs, rowNum) -> User.builder()
-            .id(rs.getLong("id"))
-            .phoneNumber(rs.getString("phone_number"))
-            .username(rs.getString("username"))
-            .password(rs.getString("password"))
-            .role(rs.getString("role"))
-            .build();
+    private final UserMapper userMapper = new UserMapper();
 
     public void save(User user) {
         String sql = "INSERT INTO users (phone_number, username, password, role) VALUES (?, ?, ?, ?)";
@@ -32,6 +27,11 @@ public class UserDao {
 
     public User findByPhoneNumber(String phoneNumber) {
         String sql = "SELECT * FROM users WHERE phone_number = ?";
-        return jdbcTemplate.queryForObject(sql, userRowMapper, phoneNumber);
+        return jdbcTemplate.queryForObject(sql, userMapper, phoneNumber);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        return jdbcTemplate.query(sql, userMapper, username).stream().findFirst();
     }
 }
