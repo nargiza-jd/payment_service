@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-insert-admin
+      author: nargiza-jd
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: phone_number
+                  value: "54321"
+              - column:
+                  name: username
+                  value: "Admin2"
+              - column:
+                  name: password
+                  value: "$2a$10$7JvShwOBd6lV4/M5Oq0jLuP8TcrfACkqWzG9xQ2NOkLK/c2gZcHgS"
+              - column:
+                  name: role
+                  value: "ROLE_ADMIN"

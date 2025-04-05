@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+/db/
+# H2 database files
+/db/payment-db.mv.db
+/db/payment-db.trace.db
+
+# Logs folder
+/logs/
+.DS_Store
