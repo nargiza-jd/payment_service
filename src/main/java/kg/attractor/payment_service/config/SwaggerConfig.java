@@ -12,7 +12,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Payment Service API")
-                        .version("1.0")
-                        .description("REST API для платежной системы"));
+                        .version("1.0.0")
+                        .description("API for payment system control work"));
     }
 }
